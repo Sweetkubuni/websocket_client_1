@@ -34,13 +34,18 @@ export default {
         this.ws = new WebSocket(url);
         this.ws.onopen = function(event) { console.log("websocket connected successfully!"); };
         this.ws.onmessage = ({data}) => {
-            console.log("recieved:" + data);
-            this.logs.push(data);
+            let resp = JSON.parse(data);
+            console.log(resp);
+            if(resp.msg_type == "broadcast")
+            {
+                this.logs.push(resp.message);
+            }
         }
   },
   methods: {
       sendmessage() {
-          this.ws.send(this.message);
+          const message_formatted = '{ "msg_type":"broadcast", "message" : "' + this.message + '" }';
+          this.ws.send(message_formatted);
           this.message = "";
       }
   }
