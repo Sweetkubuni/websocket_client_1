@@ -41,6 +41,10 @@ export default {
                 this.logs.push(resp.message);
             }
         }
+
+        this.ws.onclose = (event) => {
+            alert("websocket connection has closed!");
+        }
   },
   methods: {
       sendmessage() {
