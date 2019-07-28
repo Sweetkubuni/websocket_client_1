@@ -30,7 +30,7 @@ export default {
   },
   created(){
         console.log("connecting");
-        const url = "ws://162.245.217.17:5000";
+        const url = "ws://kubunisandbox.com:5000";
         this.ws = new WebSocket(url);
         this.ws.onopen = function(event) { console.log("websocket connected successfully!"); };
         this.ws.onmessage = ({data}) => {
@@ -41,7 +41,6 @@ export default {
                 this.logs.push(resp.message);
             }
         }
-
         this.ws.onclose = (event) => {
             alert("websocket connection has closed!");
         }
